@@ -23,10 +23,15 @@ SQL_FILE = "ola_sql_queries.sql"   # must match your file name
 st.set_page_config(page_title="OLA Analytics", layout="wide")
 st.title("OLA Analytics App")
 st.caption(f"Run saved SQL queries from **{SQL_FILE}** with MySQL filters ✅")
+st.markdown("This app shows OLA ride analytics using saved SQL queries + interactive filters, and embeds a Power BI dashboard.")
+tab1, tab2 = st.tabs(["🧮 SQL Explorer", "📊 Power BI Dashboard"])
+with tab2:
+    st.subheader("Power BI Dashboard")
+    powerbi_url = "PASTE_YOUR_URL_HERE"
+    st.components.v1.iframe(powerbi_url, height=750, scrolling=True)
+with tab1:
+    st.subheader("SQL Explorer")
 
-st.subheader("Power BI Dashboard")
-powerbi_url = "https://app.powerbi.com/view?r=eyJrIjoiY2VmYWRhMjUtY2M4OS00ZjZkLThjNzYtNDgyYWVjYTZiZWMzIiwidCI6IjQyNWE5YzdkLTBkMTItNDJiMS04MTU1LWYxNzFjNjEzNDEyOSIsImMiOjJ9"
-st.components.v1.iframe(powerbi_url, height=750, scrolling=True)
 
 
 def load_named_queries(path: str) -> dict:
